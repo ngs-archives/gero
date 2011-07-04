@@ -1,0 +1,11 @@
+com.quietlycoding.android.picker
+org.kroz.activerecord
+org.kroz.activerecord.utils
+org.ngsdev.android
+org.ngsdev.android.adapter
+org.ngsdev.android.layout
+org.ngsdev.android.model
+org.ngsdev.android.net
+org.ngsdev.android.net.impl
+org.ngsdev.android.util
+org.ngsdev.android.view
