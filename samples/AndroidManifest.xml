@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	package="org.ngsdev.android.sample20" android:versionCode="1"
+	android:versionName="1.0">
+	<application android:label="@string/app_name">
+		<activity android:name="Sample20" android:label="@string/app_name">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <data android:scheme="s20" android:host="sample20.app" android:path="/" />
+      </intent-filter>
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <data android:scheme="s20" android:host="sample20.app" android:pathPrefix="/content/" />
+      </intent-filter>
+		</activity>
+	</application>
+	<uses-sdk android:targetSdkVersion="4" />
+  <uses-permission android:name="android.permission.INTERNET"/>
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+</manifest> 

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string-array name="top_items">
+    <item>/</item>
+    <item>/content/1</item>
+    <item>/content/2?keyword=Hello&amp;suffix=World&amp;sender=@me</item>
+  </string-array>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">android20</string>
+    <string name="load_more" formatted="false">次の%1$d件を読込む</string>
+    <string name="loading">読込み中</string>
+    <string name="unspecified">指定なし</string>
+</resources>

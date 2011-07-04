@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<org.ngsdev.android.layout.MoreButton
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="horizontal" android:layout_width="fill_parent"
+	android:gravity="center|left" android:layout_height="wrap_content"
+	android:padding="15dip">
+	<ProgressBar android:id="@+id/progress_bar"
+		android:visibility="gone" android:layout_width="30dip"
+		android:layout_height="30dip" />
+	<TextView android:id="@+id/text_view" android:layout_width="fill_parent"
+		android:gravity="center|left" android:textColor="#36f"
+		android:paddingLeft="10dip" android:layout_height="30dip"
+		android:textColorHighlight="#fff" android:textColorHint="#fff" />
+</org.ngsdev.android.layout.MoreButton>

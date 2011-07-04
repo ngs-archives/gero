@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">android20</string>
+    <string name="load_more" formatted="false">Load more %1$d</string>
+    <string name="loading">Loading</string>
+    <string name="unspecified">Unspecified</string>
+</resources>
