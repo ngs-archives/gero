@@ -10,21 +10,22 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import android.os.AsyncTask;
-import org.apache.http.client.HttpClient;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.ngsdev.android.util.*;
+import org.apache.http.client.HttpClient;
+import org.ngsdev.android.util.Log20;
+
+import android.os.AsyncTask;
 
 public class URLRequestTask extends AsyncTask<Void, Double, Error> {
 	URLRequest request = null;
+	HttpClient client = null;
 	public URLRequestTask(URLRequest request) {
 		this.request = request;
 	}
 	@Override
 	protected Error doInBackground(Void... arg) {
-		HttpClient client = new DefaultHttpClient();
 		try {
 			URLCache cache = request.getCache();
 			if (request.cachePolicy != URLCachePolicy.NO_CACHE
@@ -49,7 +50,6 @@ public class URLRequestTask extends AsyncTask<Void, Double, Error> {
 			long len = ent.getContentLength();
 			boolean unknown = len <= 0;
 			double dataLen = Long.valueOf(len).doubleValue();
-			Log20.d(String.format("total %d", len));
 			File tmp = cache.getTempFile();
 			FileOutputStream fos = new FileOutputStream(tmp);
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
