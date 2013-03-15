@@ -40,7 +40,7 @@ public class URLRequestTask extends AsyncTask<Void, Double, Error> {
 					Log20.e(e);
 				}
 			}
-			HttpResponse res = client.execute(request);
+			HttpResponse res = client.execute(request.getHttpRequest());
 			HttpEntity ent = res.getEntity();
 			int cd = res.getStatusLine().getStatusCode();
 			if (cd >= 400 && cd < 500) {

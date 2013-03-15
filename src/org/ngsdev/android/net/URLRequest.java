@@ -1,4 +1,5 @@
-/** 
+/**
+
  * $Id$
  * $Author$
  * $Commiter$
@@ -271,6 +272,17 @@ public class URLRequest implements HttpUriRequest {
     if (this.isPost()) {
       ((HttpPost) this.httpRequest).setEntity(entity);
     }
+  }
+
+  public HttpEntity getEntity() {
+    if (this.isPost()) {
+      return ((HttpPost) this.httpRequest).getEntity();
+    }
+    return null;
+  }
+
+  public HttpRequestBase getHttpRequest() {
+    return this.httpRequest;
   }
 
   public URLRequestParams getURLRequestParams() {
