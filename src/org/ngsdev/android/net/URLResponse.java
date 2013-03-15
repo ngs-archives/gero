@@ -6,7 +6,9 @@
  */
 package org.ngsdev.android.net;
 
+import org.apache.http.HttpResponse;
+
 public interface URLResponse {
-  abstract void processResponse(byte[] byteArray) throws Exception;
+  abstract void processResponse(HttpResponse res, byte[] byteArray) throws Exception;
 
 }

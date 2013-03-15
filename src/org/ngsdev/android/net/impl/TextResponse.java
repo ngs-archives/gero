@@ -1,12 +1,14 @@
 package org.ngsdev.android.net.impl;
 
+import org.apache.http.HttpResponse;
 import org.ngsdev.android.net.URLResponse;
 
 public class TextResponse implements URLResponse {
 
   private String text = null;
 
-  public void processResponse(byte[] byteArray) throws Exception {
+  public void processResponse(HttpResponse res, byte[] byteArray)
+      throws Exception {
     this.text = new String(byteArray);
   }
 

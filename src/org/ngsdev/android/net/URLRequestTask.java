@@ -33,7 +33,7 @@ public class URLRequestTask extends AsyncTask<Void, Double, Error> {
       if (request.cachePolicy != URLCachePolicy.NO_CACHE && cache.exists()) {
         try {
           if (request.response != null) {
-            request.response.processResponse(cache.getCachedData());
+            request.response.processResponse(null, cache.getCachedData());
             return null;
           }
         } catch (Exception e) {
@@ -71,7 +71,7 @@ public class URLRequestTask extends AsyncTask<Void, Double, Error> {
       byte[] bytes = baos.toByteArray();
       if (!this.isCancelled()) {
         if (request.response != null)
-          request.response.processResponse(bytes);
+          request.response.processResponse(res, bytes);
         cache.store();
       }
       fos.close();

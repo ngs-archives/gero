@@ -1,5 +1,6 @@
 package org.ngsdev.android.net.impl;
 
+import org.apache.http.HttpResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,8 +15,9 @@ public class BitlyResponse extends JSONResponse {
   private Error  error;
 
   @Override
-  public void processResponse(byte[] byteArray) throws Exception {
-    super.processResponse(byteArray);
+  public void processResponse(HttpResponse res, byte[] byteArray)
+      throws Exception {
+    super.processResponse(res, byteArray);
 
     JSONObject root = this.getJSONObject();
     String statusCode = root.getString("status_code");
