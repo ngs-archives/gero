@@ -12,13 +12,14 @@ import android.graphics.Bitmap;
 
 public class BitmapResponse implements URLResponse {
 
-	private Bitmap bitmap = null;
-	
-	public void processResponse(byte[] byteArray) throws Exception {
-		bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-	}
-	public Bitmap getBitmap() {
-		return bitmap;
-	}
+  private Bitmap bitmap = null;
+
+  public void processResponse(byte[] byteArray) throws Exception {
+    bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+  }
+
+  public Bitmap getBitmap() {
+    return bitmap;
+  }
 
 }

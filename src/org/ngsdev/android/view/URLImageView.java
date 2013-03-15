@@ -26,122 +26,126 @@ import org.ngsdev.android.net.impl.BitmapResponse;
  * @attr ref android.R.styleable#ImageView_tint
  * @attr ref android.R.styleable#ImageView_scaleType
  */
-public class URLImageView extends FrameLayout
-		implements
-			URLRequest.RequestListener {
+public class URLImageView extends FrameLayout implements
+    URLRequest.RequestListener {
 
-	private URLRequest.RequestListener listener;
-	public ProgressBar mProgressBar = null;
-	public ImageView mImageView = null;
-	private String URLPath;
-	private URLRequest request;
-	private boolean loading;
+  private URLRequest.RequestListener listener;
+  public ProgressBar                 mProgressBar = null;
+  public ImageView                   mImageView   = null;
+  private String                     URLPath;
+  private URLRequest                 request;
+  private boolean                    loading;
 
-	public URLImageView(Context context) {
-		this(context, null);
-	}
-	public URLImageView(Context context, AttributeSet attrs) {
-		this(context, attrs, 0);
-	}
-	public URLImageView(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs);
-		mProgressBar = new ProgressBar(context);
-		mImageView = new ImageView(context, attrs);
+  public URLImageView(Context context) {
+    this(context, null);
+  }
 
-		final int WC = LayoutParams.WRAP_CONTENT;
-		final int FP = LayoutParams.FILL_PARENT;
-		LayoutParams lp = new LayoutParams(WC, WC);
-		lp.gravity = Gravity.CENTER;
-		this.addView(mProgressBar, lp);
-		this.addView(mImageView, new LayoutParams(FP, FP));
-		setLoading(false);
-	}
+  public URLImageView(Context context, AttributeSet attrs) {
+    this(context, attrs, 0);
+  }
 
-	/**
-	 * Controls how the image should be resized or moved to match the size of
-	 * this ImageView.
-	 * 
-	 * @param scaleType
-	 *            The desired scaling mode.
-	 * 
-	 * @attr ref android.R.styleable#ImageView_scaleType
-	 */
-	public void setScaleType(ImageView.ScaleType scaleType) {
-		mImageView.setScaleType(scaleType);
-	}
+  public URLImageView(Context context, AttributeSet attrs, int defStyle) {
+    super(context, attrs);
+    mProgressBar = new ProgressBar(context);
+    mImageView = new ImageView(context, attrs);
 
-	public void onRequestCancel(URLRequest request) {
-		URLRequest.RequestListener ln = this.getListener();
-		setLoading(false);
-		if (ln != null)
-			ln.onRequestCancel(request);
-		request = null;
-	}
+    final int WC = LayoutParams.WRAP_CONTENT;
+    final int MP = LayoutParams.MATCH_PARENT;
+    LayoutParams lp = new LayoutParams(WC, WC);
+    lp.gravity = Gravity.CENTER;
+    this.addView(mProgressBar, lp);
+    this.addView(mImageView, new LayoutParams(MP, MP));
+    setLoading(false);
+  }
 
-	public void onRequestFail(URLRequest request, Error error) {
-		URLRequest.RequestListener ln = this.getListener();
-		setLoading(false);
-		if (ln != null)
-			ln.onRequestFail(request, error);
-		request = null;
-	}
+  /**
+   * Controls how the image should be resized or moved to match the size of this
+   * ImageView.
+   * 
+   * @param scaleType
+   *          The desired scaling mode.
+   * 
+   * @attr ref android.R.styleable#ImageView_scaleType
+   */
+  public void setScaleType(ImageView.ScaleType scaleType) {
+    mImageView.setScaleType(scaleType);
+  }
 
-	public void onRequestFinishLoad(URLRequest request) {
-		BitmapResponse res = (BitmapResponse) request.response;
-		mImageView.setImageBitmap(res.getBitmap());
-		setLoading(false);
-		URLRequest.RequestListener ln = this.getListener();
-		if (ln != null)
-			ln.onRequestFinishLoad(request);
-		request = null;
-	}
+  public void onRequestCancel(URLRequest request) {
+    URLRequest.RequestListener ln = this.getListener();
+    setLoading(false);
+    if (ln != null)
+      ln.onRequestCancel(request);
+    request = null;
+  }
 
-	public void onRequestProgress(URLRequest request, Double progress) {
-		URLRequest.RequestListener ln = this.getListener();
-		if (ln != null)
-			ln.onRequestProgress(request, progress);
-	}
+  public void onRequestFail(URLRequest request, Error error) {
+    URLRequest.RequestListener ln = this.getListener();
+    setLoading(false);
+    if (ln != null)
+      ln.onRequestFail(request, error);
+    request = null;
+  }
 
-	public void onRequestStart(URLRequest request) {
-		URLRequest.RequestListener ln = this.getListener();
-		if (ln != null)
-			ln.onRequestStart(request);
-	}
-	public void setListener(URLRequest.RequestListener listener) {
-		this.listener = listener;
-	}
+  public void onRequestFinishLoad(URLRequest request) {
+    BitmapResponse res = (BitmapResponse) request.response;
+    mImageView.setImageBitmap(res.getBitmap());
+    setLoading(false);
+    URLRequest.RequestListener ln = this.getListener();
+    if (ln != null)
+      ln.onRequestFinishLoad(request);
+    request = null;
+  }
 
-	public URLRequest.RequestListener getListener() {
-		return listener;
-	}
+  public void onRequestProgress(URLRequest request, Double progress) {
+    URLRequest.RequestListener ln = this.getListener();
+    if (ln != null)
+      ln.onRequestProgress(request, progress);
+  }
 
-	public void cancel() {
-		if (request != null) {
-			request.abort();
-			request = null;
-		}
-		this.mImageView.setImageBitmap(null);
-	}
+  public void onRequestStart(URLRequest request) {
+    URLRequest.RequestListener ln = this.getListener();
+    if (ln != null)
+      ln.onRequestStart(request);
+  }
 
-	public void setURLPath(String urlPath) throws URISyntaxException {
-		this.cancel();
-		URLPath = urlPath;
-		request = new URLRequest(this.getContext(), urlPath);
-		request.response = new BitmapResponse();
-		setLoading(true);
-		request.send(this);
-	}
+  public void setListener(URLRequest.RequestListener listener) {
+    this.listener = listener;
+  }
 
-	public String getURLPath() {
-		return URLPath;
-	}
-	public void setLoading(boolean loading) {
-		mImageView.setVisibility(loading ? GONE : VISIBLE);
-		mProgressBar.setVisibility(loading ? VISIBLE : GONE);
-		this.loading = loading;
-	}
-	public boolean isLoading() {
-		return loading;
-	}
+  public URLRequest.RequestListener getListener() {
+    return listener;
+  }
+
+  public void cancel() {
+    if (request != null) {
+      request.abort();
+      request = null;
+    }
+    this.mImageView.setImageBitmap(null);
+  }
+
+  public void setURLPath(String urlPath) throws URISyntaxException {
+    this.cancel();
+    URLPath = urlPath;
+    request = new URLRequest(this.getContext(), urlPath);
+    request.response = new BitmapResponse();
+    setLoading(true);
+    request.send(this);
+  }
+
+  public String getURLPath() {
+    return URLPath;
+  }
+
+  public void setLoading(boolean loading) {
+    mImageView.setVisibility(loading ? GONE : VISIBLE);
+    mProgressBar.setVisibility(loading ? VISIBLE : GONE);
+    this.loading = loading;
+  }
+
+  public boolean isLoading() {
+    return loading;
+  }
 
 }
